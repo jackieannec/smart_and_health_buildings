@@ -7,18 +7,13 @@ import seaborn as sbn
     
 def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepath):
     df = pd.read_csv('book_with_grids.csv')  # read in all of the data
-    n = 0
-    numDataPoints = list()
+    n = 0 # sets int
+    numDataPoints = list() # makes a list to append the number of data points to
     while n < 200:
-        sensors = list(df[(df['grid'] == n)]['device_id'])
-        ldf = util.get_lfdf(fields, start_datetime, end_datetime, sensors)
-        numDataPoints.append(len(ldf))
-        n += 1
+        sensors = list(df[(df['grid'] == n)]['device_id']) # gets all of the device ids for the sensors in that grid
+        ldf = util.get_lfdf(fields, start_datetime, end_datetime, sensors) # gets all of the data for the specified variables
+        numDataPoints.append(len(ldf)) # appends the list with the number of data points retrieved
+        n += 1 # iterates through the loop
 
-    maxData = max(numDataPoints)
-    for i in range(len(numDataPoints)):
-        if numDataPoints[i] != 0:
-            temp = numDataPoints[i]/maxData
-            numDataPoints[i] = temp
-
-    bins = pd.Series(pd.qcut(numDataPoints, 6)).value_counts()
+    dataLabeledBins = pd.cut(numDataPoints, 6, True, [1, 2, 3, 4, 5, 6]) # makes 6 bins of the data
+    # returns an array of the same length as numDataPoints, except every data point is just the bin label
