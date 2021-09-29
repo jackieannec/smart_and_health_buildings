@@ -15,8 +15,11 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
         sensors = list(df[(df['grid'] == n)]['device_id']) # gets all of the device ids for the sensors in that grid
         ldf = util.get_lfdf(fields, start_datetime, end_datetime, sensors) # gets all of the data for the specified variables
         numDataPoints[x, y] # appends the list with the number of data points retrieved
-        x += 1
-        y += 1
+        if y == 19:
+            y = 0
+            x += 1
+        else:
+            y += 1
         n = 10*(2*y) + x # iterates through the loop
 
     dataLabeledBins = pd.cut(numDataPoints, 6, True, [1, 2, 3, 4, 5, 6]) # makes 6 bins of the data
