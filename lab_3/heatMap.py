@@ -13,8 +13,10 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
     numDataPoints = list() # makes a list to append the number of data points to
     while n < 200:
         sensors = list(df[(df['grid'] == n)]['device_id']) # gets all of the device ids for the sensors in that grid
-        ldf = util.get_lfdf(fields, start_datetime, end_datetime, sensors) # gets all of the data for the specified variables
-        numDataPoints[x, y] # appends the list with the number of data points retrieved
+        z = 0
+        while z < len(fields):
+            ldf = util.get_lfdf(fields[z], start_datetime, end_datetime, sensors) # gets all of the data for the specified variables
+            numDataPoints[x, y] = len(ldf) # appends the list with the number of data points retrieved
         if y == 19:
             y = 0
             x += 1
