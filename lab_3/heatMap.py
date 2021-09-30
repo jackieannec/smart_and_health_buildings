@@ -36,3 +36,7 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
         n += 1 # iterates through the loop
 
     dataLabeledBins = pd.cut(numDataPoints, 6, True, [1, 2, 3, 4, 5, 6])
+    sbn.set_theme()
+    heatmap = sbn.heatmap(numDataPoints, vmin = 0.1, vmax = 0.9)
+    heatmap.imshow(map_img)
+    plt.show()
