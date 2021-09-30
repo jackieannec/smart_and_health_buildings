@@ -16,8 +16,8 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
         fields2 = set()
         for each in fields:
             alist = each.split(',')
-            for each in alist:
-                fields2.add(each)
+            for abc in alist:
+                fields2.add(abc)
         z = 0
         sum = 0
         for each in fields2:
