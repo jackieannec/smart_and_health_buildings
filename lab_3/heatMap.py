@@ -14,10 +14,10 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
         sensors = list(df[(df['grid'] == n)]['device_id'])  # gets all of the device ids for the sensors in that grid
         fields = list(set(df[df['grid'] == n]['fields']))
         fields2 = set()
-            for each in fields:
-                alist = each.split(',')
-                for each in alist:
-                    fields2.add(each)
+        for each in fields:
+            alist = each.split(',')
+            for each in alist:
+                fields2.add(each)
         z = 0
         sum = 0
         for each in fields2:
