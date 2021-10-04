@@ -3,6 +3,7 @@ import utility as util
 from datetime import datetime
 import numpy as np
 import seaborn as sbn
+import matplotlib as mpl
 
 def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepath):
     df = pd.read_csv('book_with_grids.csv')  # read in all of the data
@@ -12,21 +13,15 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
     numDataPoints = [[0 for i in range(20)] for j in range(10)]# makes a list to append the number of data points to
     while n < 200:
         sensors = list(df[(df['grid'] == n)]['device_id'])  # gets all of the device ids for the sensors in that grid
-        '''fields = list(set(df[df['grid'] == n]['fields']))
-        fields2 = set()
-        for each in fields:
-            alist = each.split(',')
-            for abc in alist:
-                fields2.add(abc)
-        '''
-        z = 0
         sums = 0
-        for each in fields:
-            ldf = util.get_lfdf(each, start_datetime, end_datetime, sensors) # gets all of the data for the specified variables
-            if ldf is None:
-                continue
-            else:
-                sums += len(ldf)
+        for sense in sensors:
+            for each in fields:
+                ldf = util.get_lfdf(each, s, e, sense)  # gets all of the data for the specified variables
+                print(ldf)
+                if ldf is None:
+                    continue
+                else:
+                    sums += len(ldf)
         numDataPoints[x][y] = sums  # appends the list with the number of data points retrieved
         if y == 19:
             y = 0
@@ -35,8 +30,8 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
             y += 1
         n += 1 # iterates through the loop
 
-    dataLabeledBins = pd.cut(numDataPoints, 6, True, [1, 2, 3, 4, 5, 6])
-    sbn.set_theme()
-    heatmap = sbn.heatmap(numDataPoints, vmin = 0.1, vmax = 0.9)
-    heatmap.imshow(map_img)
-    plt.show()
+    map_img = mpl.image.imread('./img/lll_grid.png')
+    heatmap_data = np.random.rand(8,9)
+    hmax = sbn.heatmap(heatmap_data, alpha=0.5, zorder=2)
+    hmax.imshow(map_img, aspect=hmax.get_aspect(), extent=hmax.get_xlim() + hmax.get_ylim(), zorder=1) #put the map under the heatmap
+    mpl.pyplot.show()
