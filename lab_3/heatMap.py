@@ -31,7 +31,6 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
         n += 1 # iterates through the loop
 
     map_img = mpl.image.imread('./img/lll_grid.png')
-    heatmap_data = np.random.rand(8,9)
-    hmax = sbn.heatmap(heatmap_data, alpha=0.5, zorder=2)
+    hmax = sbn.heatmap(numDataPoints, alpha=0.5, zorder=2)
     hmax.imshow(map_img, aspect=hmax.get_aspect(), extent=hmax.get_xlim() + hmax.get_ylim(), zorder=1) #put the map under the heatmap
     mpl.pyplot.show()
