@@ -25,12 +25,8 @@ while n < 200:
                 sums += len(ldf)
     numDataPoints[x][y] = sums  # appends the list with the number of data points retrieved
     if y == 19:
-        print('two')
         y = 0
         x += 1
     else:
-        print('one')
         y += 1
-    print('------------------------------------------------------------------------------')
     n += 1
-print(numDataPoints)
