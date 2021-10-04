@@ -15,10 +15,10 @@ fields = fields2
 while n < 200:
     sensors = list(df[(df['grid'] == n)]['device_id'])  # gets all of the device ids for the sensors in that grid
     sums = 0
-    if sensors:
+    for sense in sensors:
         for each in fields:
             print(fields)
-            ldf = util.get_lfdf(each, s, e, sensors) # gets all of the data for the specified variables
+            ldf = util.get_lfdf(each, s, e, sense) # gets all of the data for the specified variables
             if ldf is None:
                 continue
             else:
