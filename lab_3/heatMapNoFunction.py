@@ -17,7 +17,7 @@ while n < 200:
     sums = 0
     for sense in sensors:
         for each in fields:
-            print(fields)
+            print(each)
             ldf = util.get_lfdf(each, s, e, sense) # gets all of the data for the specified variables
             if ldf is None:
                 continue
