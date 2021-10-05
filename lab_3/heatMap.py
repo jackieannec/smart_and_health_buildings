@@ -17,7 +17,6 @@ def generate_linklab_heatmap(start_datetime, end_datetime, fields, export_filepa
         for sense in sensors:
             for each in fields:
                 ldf = util.get_lfdf(each, s, e, sense)  # gets all of the data for the specified variables
-                print(ldf)
                 if ldf is None:
                     continue
                 else:
